@@ -63,40 +63,61 @@
          foreach($daftar_orang as $baris){
           ?>
           <tr>
-            <th scope="row">1</th>
+            <th scope="row"><?php echo $baris->id?></th>
             <td><?php echo $baris->nama?></td>
             <td><?php echo $baris->alamat?></td>
              <td>
-                <button class="btn btn-info" type="Submit">Ubah</button>
-                <a class="btn btn-success" href="Welcome/hapusOrang/<?php echo $baris->nama?>">hapus</a>
+                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $baris->id?>">Ubah</button>
+                <a class="btn btn-success" href="Welcome/hapusOrang/<?php echo $baris->id?>">hapus</a>
             </td>
           </tr>
-          <?php 
 
-         }
-        ?>
-          
-
+          <div class="modal fade" id="ubahModal<?php echo $baris->id?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Orang</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="Welcome/ubahOrang" method="post">
+                  <div class="modal-body">
+                    <input type="hidden" name="id" value="<?php echo $baris->id?>">
+                    <input type="text"name="nama" class="form-control" VALUE="<?php echo $baris->nama?>">
+                    <br>
+                    <input type="text"name="alamat" class="form-control" VALUE="<?php echo $baris->alamat?>">
+        
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <?php 
+            }
+          ?>
         </tbody>
       </table>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Orang</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">Orang</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="Welcome/TambahOrang" method="post">
-             <div class="modal-body">
-               <input type="text"name="nama" class="form-control">
-                 <br>
-               <input type="text"name="alamat" class="form-control">
-                 
-               </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
+              <div class="modal-body">
+                <input type="text"name="nama" class="form-control">
+                <br>
+                <input type="text"name="alamat" class="form-control">
+    
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
             </form>
           </div>
         </div>
